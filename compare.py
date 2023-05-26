@@ -22,7 +22,7 @@ image_document = {
     "name": "Brain_YES",
     "data": image_bytecode
 }
-collection.insert_one(image_document)
+# collection.insert_one(image_document)
 
 # Retrieve the image data from the database
 retrieved_document = collection.find_one({"name": "Brain_NO"})
@@ -43,6 +43,8 @@ image_prv1 = cv2.resize(image1, (400, 300))
 
 # Display the image
 cv2.imshow("Image", image_prv)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 cv2.imshow("Image", image_prv1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
