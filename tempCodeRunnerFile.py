@@ -1,10 +1,25 @@
-for contour in contours:
-    #     (x, y, w, h) = cv2.boundingRect(contour)
-    #     cv2.rectangle(img1, (x, y), (x + w, y + h), (0, 255, 0), 2)
-    #     cv2.rectangle(img2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+import pymongo
+import numpy as np
+import cv2
 
-    # # Display the images
-    # cv2.imshow("Image 1", img1)
-    # cv2.imshow("Image 2", img2)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+client = pymongo.MongoClient('mongodb://localhost:27017/?directConnection=true')
+mydb = client['DB']
+collection = mydb['tab']
+
+def read_image_as_bytecode(image_path):
+    with open(image_path, "rb") as image_file:
+        byte_code = image_file.read()
+    return byte_code
+
+# Provide the path to the image file
+image_path = "yes/Y2.jpg"
+
+# Read the image file as byte code
+image_bytecode = read_image_as_bytecode(image_path)
+
+# Store the image data in the database
+image_document = {
+    "name": "Brain_YES",
+    "data": image_bytecode
+}
+collection.insert_one(image_document)
