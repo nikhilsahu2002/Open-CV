@@ -35,7 +35,9 @@ nparr = np.frombuffer(retrieved_bytecode, np.uint8)
 image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 image_prv = cv2.resize(image,(400,300))
 
+
 # Display the image
 cv2.imshow("Image", image_prv)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
