@@ -72,6 +72,3 @@ def compare_images(image1, image2):
 # Compare the images
 compare_images(image_prv, image_prv1)
 
-
-# Compare the images
-# compare_images(image, image1)
