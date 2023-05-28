@@ -1,5 +1,7 @@
 import pymongo
 import os
+import numpy as np
+import cv2
 
 client = pymongo.MongoClient('mongodb://localhost:27017/?directConnection=true')
 mydb = client['DB']
@@ -28,5 +30,27 @@ for file_name in os.listdir(folder_path):
 
 # print("Image data stored in MongoDB successfully.")
 
+retrive_document = collection.find_one({"name": "Y54.jpg"})
 
+# Check if the document exists
+if retrive_document is not None:
+    # Retrieve the image data from the document
+    retrive_bytercod = retrive_document.get("data")
+
+    if retrive_bytercod is not None:
+        # Convert the byte code to a NumPy array
+        nparr = np.frombuffer(retrive_bytercod, np.uint8)
+
+        # Decode the NumPy array as an image using OpenCV
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        image_prv = cv2.resize(image, (400, 300))
+
+        # Display the image
+        cv2.imshow("Image", image_prv)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    else:
+        print("Image document does not contain 'data' field.")
+else:
+    print("Document with name 'Y54' not found.")
 
