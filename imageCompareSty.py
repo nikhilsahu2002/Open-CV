@@ -68,7 +68,7 @@ for image_doc in image_documents:
             max_similarity_image = image_doc    
 
 
-        print(f"Similarity with {image_doc['name']}: {similarity:.2f}%")
+        # print(f"Similarity with {image_doc['name']}: {similarity:.2f}%")
     else:
         print("Image document does not contain 'data' field.")
 
