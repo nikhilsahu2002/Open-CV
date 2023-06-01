@@ -67,8 +67,9 @@ for image_doc in image_documents:
             max_similarity = similarity
             max_similarity_image = image_doc    
 
+      
 
-        # print(f"Similarity with {image_doc['name']}: {similarity:.2f}%")
+        print(f"Similarity with {image_doc['name']}: {similarity:.2f}%")
     else:
         print("Image document does not contain 'data' field.")
 
@@ -78,7 +79,14 @@ for image_doc in image_documents:
 # else:
 #     print("No images found in the database.")
 
+
+
 if max_similarity_image is not None:
     print(f"Max Similarity: {max_similarity:.2f}% with image {max_similarity_image['name']}")
 else:
     print("No images found in the database.")
+
+cv2.imshow("Image", new_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()  
+    
