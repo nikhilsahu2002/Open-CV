@@ -86,7 +86,7 @@ if max_similarity_image is not None:
 else:
     print("No images found in the database.")
 
-cv2.imshow("Image", new_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()  
+# cv2.imshow("Image", new_image)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()  
     
