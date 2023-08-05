@@ -42,10 +42,10 @@ def apply_data_augmentation(image_path, output_directory, num_augmented_images=1
 if __name__ == "__main__":
     # Specify the input image file path
     # input_image_path = r"E:\Open CV\Screenshot (314).png"  # Replace with the actual image file path
-    input_image_path = r"E:\Open CV\Screenshot (318).png"  # Replace with the actual image file path
+    input_image_path = r"E:\Open CV\Testing_Images\Autism.png"  # Replace with the actual image file path
 
     # Specify the output directory to save augmented images
-    output_directory = "autisum_test"
+    output_directory = "autisum_test1"
 
     # Number of augmented images to create
     num_augmented_images = 100

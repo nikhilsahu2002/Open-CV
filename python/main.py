@@ -71,7 +71,7 @@ def load_and_preprocess_image(file_path):
     return img_array
 
 # Load an image for prediction
-img_path = r'E:\Open CV\Screenshot (320).png'
+img_path = r'E:\Open CV\Testing_Images\Not Autism.png'
 img_array = load_and_preprocess_image(img_path)
 
 # Make the prediction
