@@ -1,4 +1,4 @@
-import cv2
+pipimport cv2
 from mtcnn import MTCNN
 import numpy as np
 import os

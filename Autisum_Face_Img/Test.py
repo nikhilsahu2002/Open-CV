@@ -94,6 +94,9 @@ history = model.fit(
     validation_data=(X_test, y_test)
 )
 
+
+model.save("Autisum_Detector_Model_2.h5")
+
 # Evaluate and Predict
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
 print("Test Loss:", test_loss)
