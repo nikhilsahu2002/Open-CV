@@ -31,15 +31,27 @@ for class_name in [autism_class, no_autism_class]:
 autism_images = np.array(autism_images)
 no_autism_images = np.array(no_autism_images)
 
-# Create Labels and Split Data
+# Create Labels
 autism_labels = np.ones(len(autism_images))
 no_autism_labels = np.zeros(len(no_autism_images))
 
-X = np.concatenate((autism_images, no_autism_images))
-y = np.concatenate((autism_labels, no_autism_labels))
+# Split Data for Training and Testing
+X_train_autism, X_test_autism, y_train_autism, y_test_autism = train_test_split(
+    autism_images, autism_labels, test_size=0.2, random_state=42)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+X_train_no_autism, X_test_no_autism, y_train_no_autism, y_test_no_autism = train_test_split(
+    no_autism_images, no_autism_labels, test_size=0.2, random_state=42)
+
+# Combine Autism and Non-Autism Data for Testing
+X_test = np.concatenate((X_test_autism, X_test_no_autism))
+y_test = np.concatenate((y_test_autism, y_test_no_autism))
+
+# Shuffle the Testing Data
+shuffle_indices = np.arange(len(X_test))
+np.random.shuffle(shuffle_indices)
+
+X_test = X_test[shuffle_indices]
+y_test = y_test[shuffle_indices]
 
 # Build and Compile Model
 model = Sequential([
@@ -69,19 +81,18 @@ datagen = ImageDataGenerator(
     fill_mode='nearest'
 )
 
-datagen.fit(X_train)
+# Use one of the class datasets for data augmentation
+datagen.fit(X_train_autism)
 
 batch_size = 16
 epochs = 5
 
 history = model.fit(
-    datagen.flow(X_train, y_train, batch_size=batch_size),
-    steps_per_epoch=len(X_train) // batch_size,
+    datagen.flow(X_train_autism, y_train_autism, batch_size=batch_size),
+    steps_per_epoch=len(X_train_autism) // batch_size,
     epochs=epochs,
     validation_data=(X_test, y_test)
 )
-
-model.save("Autisum_Detector_Model.h5")
 
 # Evaluate and Predict
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
